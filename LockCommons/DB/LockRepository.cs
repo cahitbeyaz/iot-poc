@@ -107,10 +107,28 @@ namespace LockCommons.DB
         /// </summary>
         public async Task UpsertLockDeviceBson(LockDeviceBson lockDevice)
         {
-            var result = await _LockDeviceBsonsCollection.ReplaceOneAsync(
-                filter: new BsonDocument("lockDeviceId", lockDevice.LockDeviceId),
-                options: new UpdateOptions { IsUpsert = true },
-                replacement: lockDevice);
+            var findFilter = Builders<LockDeviceBson>.Filter.Eq(s => s.LockDeviceId, lockDevice?.LockDeviceId);
+
+
+            var exits = await _LockDeviceBsonsCollection.FindAsync<LockDeviceBson>(filter: findFilter);
+            LockDeviceBson firstOrDefaultLockDevice = exits.FirstOrDefault();
+            if (firstOrDefaultLockDevice == null)
+            {
+                await _LockDeviceBsonsCollection.InsertOneAsync(lockDevice);
+            }
+            else
+            {
+                if (lockDevice.LastActiveTime == null)
+                    lockDevice.LastActiveTime = firstOrDefaultLockDevice.LastActiveTime;
+
+                await _LockDeviceBsonsCollection.UpdateOneAsync(findFilter, new ObjectUpdateDefinition<LockDeviceBson>(lockDevice));
+            }
+
+            //upsert failse to work due to lack of _id generation
+            //var result = await _LockDeviceBsonsCollection.ReplaceOneAsync(
+            //    filter: new BsonDocument("lockDeviceId", lockDevice.LockDeviceId),
+            //    options: new UpdateOptions { IsUpsert = true },
+            //    replacement: lockDevice);
         }
 
         /// <summary>

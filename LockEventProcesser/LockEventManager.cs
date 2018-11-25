@@ -2,6 +2,7 @@
 using LockCommons.Models;
 using LockCommons.Models.Proto;
 using LockCommons.Mq;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,27 +21,36 @@ namespace LockEventProcesser
             eventHandler.LockEventProcessHandler += ProcessAEvent;
         }
 
-        private async Task ProcessAEvent(LockEvent lockEvent)
+        private async Task<bool> ProcessAEvent(LockEvent lockEvent)
         {
-            LockDeviceBson lockDeviceBson = new LockDeviceBson()
+            try
             {
-                IsActive = true,
-                LastActiveTime = lockEvent.EventTime.ToDateTime(),
-                LockDeviceId = lockEvent.LockDeviceId
-            };
+                LockDeviceBson lockDeviceBson = new LockDeviceBson()
+                {
+                    IsActive = true,
+                    LastActiveTime = lockEvent.EventTime.ToDateTime(),
+                    LockDeviceId = lockEvent.LockDeviceId
+                };
 
-            await MongoDriver.MongoDbRepo.UpsertLockDeviceBson(lockDeviceBson);
+                await MongoDriver.MongoDbRepo.UpsertLockDeviceBson(lockDeviceBson);
 
-            LockEventBson lockEventBson = new LockEventBson()
+                LockEventBson lockEventBson = new LockEventBson()
+                {
+                    DeviceEvent = lockEvent.DeviceEvent,
+                    EventTime = lockEvent.EventTime.ToDateTime(),
+                    LockDeviceBson = new LockDeviceBson() { LockDeviceId = lockDeviceBson.LockDeviceId },
+                    RequestReferenceNumber = lockEvent.RequestReferenceNumber
+                };
+
+                await MongoDriver.MongoDbRepo.InsertLockEventBson(lockEventBson);
+                Console.WriteLine($"Event processed to be processed {lockEvent}");
+                return true;
+            }
+            catch (Exception e)
             {
-                DeviceEvent = lockEvent.DeviceEvent,
-                EventTime = lockEvent.EventTime.ToDateTime(),
-                LockDeviceBson = new LockDeviceBson() { LockDeviceId = lockDeviceBson.LockDeviceId },
-                RequestReferenceNumber = lockEvent.RequestReferenceNumber
-            };
-
-            await MongoDriver.MongoDbRepo.InsertLockEventBson(lockEventBson);
-            Console.WriteLine($"Event processed to be processed {lockEvent}");
+                Console.WriteLine($"err {e}");
+            }
+            return false;
 
         }
 

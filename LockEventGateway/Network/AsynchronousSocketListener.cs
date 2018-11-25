@@ -73,21 +73,28 @@ namespace LockEventGateway.Network
 
         public static void AcceptCallback(IAsyncResult ar)
         {
-            // Signal the main thread to continue.  
-            allDone.Set();
+            try
+            {
+                // Signal the main thread to continue.  
+                allDone.Set();
 
-            // Get the socket that handles the client request.  
-            Socket listener = (Socket)ar.AsyncState;
-            Socket handler = listener.EndAccept(ar);
-            StateObject state = new StateObject();
+                // Get the socket that handles the client request.  
+                Socket listener = (Socket)ar.AsyncState;
+                Socket handler = listener.EndAccept(ar);
+                StateObject state = new StateObject();
 
-            Console.WriteLine($"Connection accepted {handler.RemoteEndPoint}");
-            //maybe lack message framing
-            //state.networkStream = new NetworkStream(state.workSocket);
-            //LockEvent.Parser.ParseDelimitedFrom()
+                Console.WriteLine($"Connection accepted {handler.RemoteEndPoint}");
+                //maybe lack message framing
+                //state.networkStream = new NetworkStream(state.workSocket);
+                //LockEvent.Parser.ParseDelimitedFrom()
 
-            state.workSocket = handler;
-            handler.BeginReceive(state.buffer, state.bufferIdx, 4, 0, new AsyncCallback(ReadCallback), state);//read length first
+                state.workSocket = handler;
+                handler.BeginReceive(state.buffer, state.bufferIdx, 4, 0, new AsyncCallback(ReadCallback), state);//read length first
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"unexpected error client err AcceptCallback {e}");
+            }
         }
 
         public static void ReadCallback(IAsyncResult ar)

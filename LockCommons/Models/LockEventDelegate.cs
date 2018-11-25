@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LockCommons.Models
 {
-    public delegate Task ProcessLockEvent(LockEvent lockEvent);
+    public delegate Task<bool> ProcessLockEvent(LockEvent lockEvent);
 
     public class DeliveryEventHandler
     {
@@ -15,10 +15,10 @@ namespace LockCommons.Models
         {
         }
 
-        public void ProcessEvent(byte[] data)
+        public async Task<bool> ProcessEvent(byte[] data)
         {
             LockEvent lockEvent= LockEvent.Parser.ParseFrom(data);
-            LockEventProcessHandler.Invoke(lockEvent);
+            return await LockEventProcessHandler.Invoke(lockEvent);
         }
     }
 }

@@ -12,9 +12,12 @@ namespace LockEventProcesser
         static void Main(string[] args)
         {
 
+            MongoDriver.ConfigureDriver();
+
             LockEventManager lockEventManager = new LockEventManager();
             lockEventManager.StartHandling();
-            MongoDriver.ConfigureDriver();
+
+            Console.WriteLine("LockEventProcesser LockEvent subscriber started");
 
             Console.ReadLine();
         }

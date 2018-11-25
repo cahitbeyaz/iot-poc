@@ -66,14 +66,16 @@ namespace LockCommons.Mq
             channel.BasicQos(prefetchSize: 0, prefetchCount: nmrOfConcurrentWorkers, global: false);
 
             var consumer = new EventingBasicConsumer(channel);
-            consumer.Received +=
+            consumer.Received += async
                 (model, ea) =>
             {
                 try
                 {
-                    lockEventDelegate.ProcessEvent(ea.Body);
-                    channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);//if an error occurs queue item is not lost
-                    }
+                    bool success = await lockEventDelegate.ProcessEvent(ea.Body);
+                    if (success)
+                        channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);//if an error occurs queue item is not lost
+
+                }
                 catch (Exception e)
                 {
                     Console.WriteLine($"Error occured while processing msg {e}");

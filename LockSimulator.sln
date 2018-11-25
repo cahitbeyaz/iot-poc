@@ -9,6 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LockCommons", "LockCommons\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A5315CD2-68F8-4329-98A1-DA6A701F08A6}"
 	ProjectSection(SolutionItems) = preProject
+		init.bat = init.bat
 		readme.txt = readme.txt
 	EndProjectSection
 EndProject
@@ -16,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LockEventGateway", "LockEve
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LockEventProcesser", "LockEventProcesser\LockEventProcesser.csproj", "{27620CEC-9BEF-44FF-A1DD-7C17BE5F76FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LockEventUI", "LockEventUI\LockEventUI.csproj", "{E509F61A-3D1C-4052-913F-201C40BE4499}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LockEventUI", "LockEventUI\LockEventUI.csproj", "{E509F61A-3D1C-4052-913F-201C40BE4499}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

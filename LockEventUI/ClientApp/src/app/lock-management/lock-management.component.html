@@ -20,17 +20,24 @@
     <tr *ngFor="let lockRes of lockDeviceEventResults">
       <td>{{lockRes.lockDevice.lockDeviceId}}</td>
       <td>
-        <mat-slide-toggle [checked]="lockRes.lockDevice.isActive">
+        <mat-slide-toggle [(ngModel)]="lockRes.lockDevice.isActive"  (change)="ChangeStatus(lockRes)" >
           
         </mat-slide-toggle>
 
 
       </td>
-      <td>{{lockRes.lockDevice.lastActiveTime | date:'medium' }}</td>
+      <td>{{lockRes.lockDevice.lastActiveTime | date:'medium' : 'UTC/GMT' }}</td>
       <td>
         <table class='table' *ngIf="lockRes.lockDeviceEvents">
+          <thead>
+            <tr>
+              <td>Event Time</td>
+              <td>Event</td>
+              <td>RRN</td>
+            </tr>
+          </thead>
           <tr *ngFor="let devEvent of lockRes.lockDeviceEvents">
-            <td>{{devEvent.eventTime | date:'medium' }}</td>
+            <td>{{devEvent.eventTime | date:'medium' : 'UTC/GMT'}}</td>
             <td>{{devEvent.deviceEvent}}</td>
             <td>{{devEvent.requestReferenceNumber}}</td>
           </tr>
