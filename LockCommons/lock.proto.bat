@@ -1,0 +1,1 @@
+﻿.\protoc  --csharp_out=Models\Lock.Proto.cs lock.proto

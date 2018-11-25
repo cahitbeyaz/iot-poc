@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2050
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LockSimulator", "LockSimulator\LockSimulator.csproj", "{D4A487D6-F1A4-4729-98EA-2ACA159993A7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LockCommons", "LockCommons\LockCommons.csproj", "{418DC34D-9F35-4B8C-90AA-82991D545140}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A5315CD2-68F8-4329-98A1-DA6A701F08A6}"
+	ProjectSection(SolutionItems) = preProject
+		readme.txt = readme.txt
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LockEventGateway", "LockEventGateway\LockEventGateway.csproj", "{53C41AA0-611F-4A2A-A9AD-AE0A79352930}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LockEventProcesser", "LockEventProcesser\LockEventProcesser.csproj", "{27620CEC-9BEF-44FF-A1DD-7C17BE5F76FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LockEventUI", "LockEventUI\LockEventUI.csproj", "{E509F61A-3D1C-4052-913F-201C40BE4499}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D4A487D6-F1A4-4729-98EA-2ACA159993A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4A487D6-F1A4-4729-98EA-2ACA159993A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4A487D6-F1A4-4729-98EA-2ACA159993A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4A487D6-F1A4-4729-98EA-2ACA159993A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{418DC34D-9F35-4B8C-90AA-82991D545140}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{418DC34D-9F35-4B8C-90AA-82991D545140}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{418DC34D-9F35-4B8C-90AA-82991D545140}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{418DC34D-9F35-4B8C-90AA-82991D545140}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53C41AA0-611F-4A2A-A9AD-AE0A79352930}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53C41AA0-611F-4A2A-A9AD-AE0A79352930}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53C41AA0-611F-4A2A-A9AD-AE0A79352930}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53C41AA0-611F-4A2A-A9AD-AE0A79352930}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27620CEC-9BEF-44FF-A1DD-7C17BE5F76FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27620CEC-9BEF-44FF-A1DD-7C17BE5F76FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27620CEC-9BEF-44FF-A1DD-7C17BE5F76FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27620CEC-9BEF-44FF-A1DD-7C17BE5F76FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E509F61A-3D1C-4052-913F-201C40BE4499}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E509F61A-3D1C-4052-913F-201C40BE4499}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E509F61A-3D1C-4052-913F-201C40BE4499}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E509F61A-3D1C-4052-913F-201C40BE4499}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {13B0D611-F227-49F0-A11A-6F7AB9E3428C}
+	EndGlobalSection
+EndGlobal

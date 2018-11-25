@@ -1,0 +1,19 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "LockCommons.Models.Proto";
+
+
+message LockEvent {
+  string LockDeviceId = 1;
+  google.protobuf.Timestamp EventTime = 2;
+  enum DeviceEventEnum {
+    None=0;
+    Open=1;
+    Close=2;
+    Tamper=3;
+	Hearbeat=4,
+  }
+  DeviceEventEnum DeviceEvent = 3;
+  string RequestReferenceNumber = 4;
+}

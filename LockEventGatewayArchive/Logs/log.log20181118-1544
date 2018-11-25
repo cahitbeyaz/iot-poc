@@ -1,0 +1,322 @@
+2018-11-18 15:41:12,270 [1] INFO  Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager [(null)] - User profile is available. Using 'C:\Users\cahitb1\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2018-11-18 15:41:12,958 [10] INFO  Microsoft.AspNetCore.Hosting.Internal.WebHost [(null)] - Request starting HTTP/1.1 DEBUG http://localhost:51490/  0
+2018-11-18 15:41:12,958 [10] INFO  Microsoft.AspNetCore.Hosting.Internal.WebHost [(null)] - Request starting HTTP/1.1 DEBUG http://localhost:51490/  0
+2018-11-18 15:41:12,991 [10] INFO  Microsoft.AspNetCore.Hosting.Internal.WebHost [(null)] - Request finished in 31.9714ms 200 
+2018-11-18 15:41:12,991 [10] INFO  Microsoft.AspNetCore.Hosting.Internal.WebHost [(null)] - Request finished in 31.9714ms 200 
+2018-11-18 15:41:13,951 [10] INFO  Microsoft.AspNetCore.Hosting.Internal.WebHost [(null)] - Request starting HTTP/1.1 POST http://localhost:51490/api/LockEvent application/json; charset=utf-8 148
+2018-11-18 15:41:13,951 [10] INFO  Microsoft.AspNetCore.Hosting.Internal.WebHost [(null)] - Request starting HTTP/1.1 POST http://localhost:51490/api/LockEvent application/json; charset=utf-8 148
+2018-11-18 15:41:14,444 [10] INFO  Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker [(null)] - Route matched with {action = "Post", controller = "LockEvent"}. Executing action LockEventGateway.Controllers.LockEventController.Post (LockEventGateway)
+2018-11-18 15:41:14,444 [10] INFO  Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker [(null)] - Route matched with {action = "Post", controller = "LockEvent"}. Executing action LockEventGateway.Controllers.LockEventController.Post (LockEventGateway)
+2018-11-18 15:41:14,544 [10] INFO  Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker [(null)] - Executing action method LockEventGateway.Controllers.LockEventController.Post (LockEventGateway) with arguments (LockCommons.Models.LockEventRequest) - Validation state: Valid
+2018-11-18 15:41:14,544 [10] INFO  Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker [(null)] - Executing action method LockEventGateway.Controllers.LockEventController.Post (LockEventGateway) with arguments (LockCommons.Models.LockEventRequest) - Validation state: Valid
+2018-11-18 15:41:21,166 [10] INFO  Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker [(null)] - Executed action LockEventGateway.Controllers.LockEventController.Post (LockEventGateway) in 6718.6145ms
+2018-11-18 15:41:21,166 [10] INFO  Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker [(null)] - Executed action LockEventGateway.Controllers.LockEventController.Post (LockEventGateway) in 6718.6145ms
+2018-11-18 15:41:21,223 [10] ERROR Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware [(null)] - An unhandled exception has occurred while executing the request.
+RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified endpoints were reachable ---> System.AggregateException: One or more errors occurred. (Connection failed) ---> RabbitMQ.Client.Exceptions.ConnectFailureException: Connection failed ---> System.Net.Internals.SocketExceptionFactory+ExtendedSocketException: No connection could be made because the target machine actively refused it 127.0.0.1:5672
+   at System.Net.Sockets.Socket.EndConnect(IAsyncResult asyncResult)
+   at System.Net.Sockets.Socket.<>c.<ConnectAsync>b__272_0(IAsyncResult iar)
+--- End of stack trace from previous location where exception was thrown ---
+   at RabbitMQ.Client.TcpClientAdapter.ConnectAsync(String host, Int32 port)
+   at RabbitMQ.Client.Impl.TaskExtensions.TimeoutAfter(Task task, Int32 millisecondsTimeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectOrFail(ITcpClient socket, AmqpTcpEndpoint endpoint, Int32 timeout)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingAddressFamily(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout, AddressFamily family)
+   at RabbitMQ.Client.Impl.SocketFrameHandler..ctor(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.ConnectionFactory.CreateFrameHandler(AmqpTcpEndpoint endpoint)
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   at RabbitMQ.Client.Framing.Impl.AutorecoveringConnection.Init(IEndpointResolver endpoints)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   at LockCommons.Mq.EventMqBroker.Queue(Byte[] data) in C:\Users\cahitb1\cb\lock\LockSimulator\LockCommons\Mq\EventMqBroker.cs:line 21
+   at LockCommons.Mq.EventMqBroker.Queue(Object obj) in C:\Users\cahitb1\cb\lock\LockSimulator\LockCommons\Mq\EventMqBroker.cs:line 15
+   at LockEventGateway.Controllers.LockEventController.Post(LockEventRequest lockEvent) in C:\Users\cahitb1\cb\lock\LockSimulator\LockEventGateway\Controllers\LockEventController.cs:line 19
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.SyncObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.Invoke(HttpContext context)
+2018-11-18 15:41:21,226 [10] ERROR Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware [(null)] - An unhandled exception has occurred while executing the request.
+RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified endpoints were reachable ---> System.AggregateException: One or more errors occurred. (Connection failed) ---> RabbitMQ.Client.Exceptions.ConnectFailureException: Connection failed ---> System.Net.Internals.SocketExceptionFactory+ExtendedSocketException: No connection could be made because the target machine actively refused it 127.0.0.1:5672
+   at System.Net.Sockets.Socket.EndConnect(IAsyncResult asyncResult)
+   at System.Net.Sockets.Socket.<>c.<ConnectAsync>b__272_0(IAsyncResult iar)
+--- End of stack trace from previous location where exception was thrown ---
+   at RabbitMQ.Client.TcpClientAdapter.ConnectAsync(String host, Int32 port)
+   at RabbitMQ.Client.Impl.TaskExtensions.TimeoutAfter(Task task, Int32 millisecondsTimeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectOrFail(ITcpClient socket, AmqpTcpEndpoint endpoint, Int32 timeout)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingAddressFamily(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout, AddressFamily family)
+   at RabbitMQ.Client.Impl.SocketFrameHandler..ctor(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.ConnectionFactory.CreateFrameHandler(AmqpTcpEndpoint endpoint)
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   at RabbitMQ.Client.Framing.Impl.AutorecoveringConnection.Init(IEndpointResolver endpoints)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   at LockCommons.Mq.EventMqBroker.Queue(Byte[] data) in C:\Users\cahitb1\cb\lock\LockSimulator\LockCommons\Mq\EventMqBroker.cs:line 21
+   at LockCommons.Mq.EventMqBroker.Queue(Object obj) in C:\Users\cahitb1\cb\lock\LockSimulator\LockCommons\Mq\EventMqBroker.cs:line 15
+   at LockEventGateway.Controllers.LockEventController.Post(LockEventRequest lockEvent) in C:\Users\cahitb1\cb\lock\LockSimulator\LockEventGateway\Controllers\LockEventController.cs:line 19
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.SyncObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.Invoke(HttpContext context)
+2018-11-18 15:41:21,239 [10] ERROR ExceptionMiddlewareExtensions [(null)] - Something went wrong: RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified endpoints were reachable ---> System.AggregateException: One or more errors occurred. (Connection failed) ---> RabbitMQ.Client.Exceptions.ConnectFailureException: Connection failed ---> System.Net.Internals.SocketExceptionFactory+ExtendedSocketException: No connection could be made because the target machine actively refused it 127.0.0.1:5672
+   at System.Net.Sockets.Socket.EndConnect(IAsyncResult asyncResult)
+   at System.Net.Sockets.Socket.<>c.<ConnectAsync>b__272_0(IAsyncResult iar)
+--- End of stack trace from previous location where exception was thrown ---
+   at RabbitMQ.Client.TcpClientAdapter.ConnectAsync(String host, Int32 port)
+   at RabbitMQ.Client.Impl.TaskExtensions.TimeoutAfter(Task task, Int32 millisecondsTimeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectOrFail(ITcpClient socket, AmqpTcpEndpoint endpoint, Int32 timeout)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingAddressFamily(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout, AddressFamily family)
+   at RabbitMQ.Client.Impl.SocketFrameHandler..ctor(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.ConnectionFactory.CreateFrameHandler(AmqpTcpEndpoint endpoint)
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   at RabbitMQ.Client.Framing.Impl.AutorecoveringConnection.Init(IEndpointResolver endpoints)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   at LockCommons.Mq.EventMqBroker.Queue(Byte[] data) in C:\Users\cahitb1\cb\lock\LockSimulator\LockCommons\Mq\EventMqBroker.cs:line 21
+   at LockCommons.Mq.EventMqBroker.Queue(Object obj) in C:\Users\cahitb1\cb\lock\LockSimulator\LockCommons\Mq\EventMqBroker.cs:line 15
+   at LockEventGateway.Controllers.LockEventController.Post(LockEventRequest lockEvent) in C:\Users\cahitb1\cb\lock\LockSimulator\LockEventGateway\Controllers\LockEventController.cs:line 19
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.SyncObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.Invoke(HttpContext context)
+2018-11-18 15:41:21,239 [10] ERROR ExceptionMiddlewareExtensions [(null)] - Something went wrong: RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified endpoints were reachable ---> System.AggregateException: One or more errors occurred. (Connection failed) ---> RabbitMQ.Client.Exceptions.ConnectFailureException: Connection failed ---> System.Net.Internals.SocketExceptionFactory+ExtendedSocketException: No connection could be made because the target machine actively refused it 127.0.0.1:5672
+   at System.Net.Sockets.Socket.EndConnect(IAsyncResult asyncResult)
+   at System.Net.Sockets.Socket.<>c.<ConnectAsync>b__272_0(IAsyncResult iar)
+--- End of stack trace from previous location where exception was thrown ---
+   at RabbitMQ.Client.TcpClientAdapter.ConnectAsync(String host, Int32 port)
+   at RabbitMQ.Client.Impl.TaskExtensions.TimeoutAfter(Task task, Int32 millisecondsTimeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectOrFail(ITcpClient socket, AmqpTcpEndpoint endpoint, Int32 timeout)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingAddressFamily(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout, AddressFamily family)
+   at RabbitMQ.Client.Impl.SocketFrameHandler..ctor(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.ConnectionFactory.CreateFrameHandler(AmqpTcpEndpoint endpoint)
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   at RabbitMQ.Client.Framing.Impl.AutorecoveringConnection.Init(IEndpointResolver endpoints)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   at LockCommons.Mq.EventMqBroker.Queue(Byte[] data) in C:\Users\cahitb1\cb\lock\LockSimulator\LockCommons\Mq\EventMqBroker.cs:line 21
+   at LockCommons.Mq.EventMqBroker.Queue(Object obj) in C:\Users\cahitb1\cb\lock\LockSimulator\LockCommons\Mq\EventMqBroker.cs:line 15
+   at LockEventGateway.Controllers.LockEventController.Post(LockEventRequest lockEvent) in C:\Users\cahitb1\cb\lock\LockSimulator\LockEventGateway\Controllers\LockEventController.cs:line 19
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.SyncObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.Invoke(HttpContext context)
+2018-11-18 15:41:21,248 [10] INFO  Microsoft.AspNetCore.Hosting.Internal.WebHost [(null)] - Request finished in 7296.6223ms 500 application/json
+2018-11-18 15:41:21,249 [10] INFO  Microsoft.AspNetCore.Hosting.Internal.WebHost [(null)] - Request finished in 7296.6223ms 500 application/json
+2018-11-18 15:43:32,942 [1] INFO  Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager [(null)] - User profile is available. Using 'C:\Users\cahitb1\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2018-11-18 15:43:33,665 [7] INFO  Microsoft.AspNetCore.Hosting.Internal.WebHost [(null)] - Request starting HTTP/1.1 DEBUG http://localhost:51490/  0
+2018-11-18 15:43:33,665 [7] INFO  Microsoft.AspNetCore.Hosting.Internal.WebHost [(null)] - Request starting HTTP/1.1 DEBUG http://localhost:51490/  0
+2018-11-18 15:43:33,693 [7] INFO  Microsoft.AspNetCore.Hosting.Internal.WebHost [(null)] - Request finished in 27.9343ms 200 
+2018-11-18 15:43:33,694 [7] INFO  Microsoft.AspNetCore.Hosting.Internal.WebHost [(null)] - Request finished in 27.9343ms 200 
+2018-11-18 15:43:41,648 [9] INFO  Microsoft.AspNetCore.Hosting.Internal.WebHost [(null)] - Request starting HTTP/1.1 POST http://localhost:51490/api/LockEvent application/json; charset=utf-8 148
+2018-11-18 15:43:41,649 [9] INFO  Microsoft.AspNetCore.Hosting.Internal.WebHost [(null)] - Request starting HTTP/1.1 POST http://localhost:51490/api/LockEvent application/json; charset=utf-8 148
+2018-11-18 15:43:41,841 [9] INFO  Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker [(null)] - Route matched with {action = "Post", controller = "LockEvent"}. Executing action LockEventGateway.Controllers.LockEventController.Post (LockEventGateway)
+2018-11-18 15:43:41,841 [9] INFO  Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker [(null)] - Route matched with {action = "Post", controller = "LockEvent"}. Executing action LockEventGateway.Controllers.LockEventController.Post (LockEventGateway)
+2018-11-18 15:43:41,922 [9] INFO  Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker [(null)] - Executing action method LockEventGateway.Controllers.LockEventController.Post (LockEventGateway) with arguments (LockCommons.Models.LockEventRequest) - Validation state: Valid
+2018-11-18 15:43:41,922 [9] INFO  Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker [(null)] - Executing action method LockEventGateway.Controllers.LockEventController.Post (LockEventGateway) with arguments (LockCommons.Models.LockEventRequest) - Validation state: Valid
+2018-11-18 15:43:52,629 [9] INFO  Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker [(null)] - Executed action LockEventGateway.Controllers.LockEventController.Post (LockEventGateway) in 10784.8349ms
+2018-11-18 15:43:52,629 [9] INFO  Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker [(null)] - Executed action LockEventGateway.Controllers.LockEventController.Post (LockEventGateway) in 10784.8349ms
+2018-11-18 15:43:52,683 [9] ERROR Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware [(null)] - An unhandled exception has occurred while executing the request.
+RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified endpoints were reachable ---> System.AggregateException: One or more errors occurred. (Connection failed) ---> RabbitMQ.Client.Exceptions.ConnectFailureException: Connection failed ---> System.Net.Internals.SocketExceptionFactory+ExtendedSocketException: No connection could be made because the target machine actively refused it 127.0.0.1:5672
+   at System.Net.Sockets.Socket.EndConnect(IAsyncResult asyncResult)
+   at System.Net.Sockets.Socket.<>c.<ConnectAsync>b__272_0(IAsyncResult iar)
+--- End of stack trace from previous location where exception was thrown ---
+   at RabbitMQ.Client.TcpClientAdapter.ConnectAsync(String host, Int32 port)
+   at RabbitMQ.Client.Impl.TaskExtensions.TimeoutAfter(Task task, Int32 millisecondsTimeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectOrFail(ITcpClient socket, AmqpTcpEndpoint endpoint, Int32 timeout)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingAddressFamily(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout, AddressFamily family)
+   at RabbitMQ.Client.Impl.SocketFrameHandler..ctor(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.ConnectionFactory.CreateFrameHandler(AmqpTcpEndpoint endpoint)
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   at RabbitMQ.Client.Framing.Impl.AutorecoveringConnection.Init(IEndpointResolver endpoints)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   at LockCommons.Mq.EventMqBroker.Queue(Byte[] data) in C:\Users\cahitb1\cb\lock\LockSimulator\LockCommons\Mq\EventMqBroker.cs:line 21
+   at LockCommons.Mq.EventMqBroker.Queue(Object obj) in C:\Users\cahitb1\cb\lock\LockSimulator\LockCommons\Mq\EventMqBroker.cs:line 15
+   at LockEventGateway.Controllers.LockEventController.Post(LockEventRequest lockEvent) in C:\Users\cahitb1\cb\lock\LockSimulator\LockEventGateway\Controllers\LockEventController.cs:line 19
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.SyncObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.Invoke(HttpContext context)
+2018-11-18 15:43:52,687 [9] ERROR Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware [(null)] - An unhandled exception has occurred while executing the request.
+RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified endpoints were reachable ---> System.AggregateException: One or more errors occurred. (Connection failed) ---> RabbitMQ.Client.Exceptions.ConnectFailureException: Connection failed ---> System.Net.Internals.SocketExceptionFactory+ExtendedSocketException: No connection could be made because the target machine actively refused it 127.0.0.1:5672
+   at System.Net.Sockets.Socket.EndConnect(IAsyncResult asyncResult)
+   at System.Net.Sockets.Socket.<>c.<ConnectAsync>b__272_0(IAsyncResult iar)
+--- End of stack trace from previous location where exception was thrown ---
+   at RabbitMQ.Client.TcpClientAdapter.ConnectAsync(String host, Int32 port)
+   at RabbitMQ.Client.Impl.TaskExtensions.TimeoutAfter(Task task, Int32 millisecondsTimeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectOrFail(ITcpClient socket, AmqpTcpEndpoint endpoint, Int32 timeout)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingAddressFamily(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout, AddressFamily family)
+   at RabbitMQ.Client.Impl.SocketFrameHandler..ctor(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.ConnectionFactory.CreateFrameHandler(AmqpTcpEndpoint endpoint)
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   at RabbitMQ.Client.Framing.Impl.AutorecoveringConnection.Init(IEndpointResolver endpoints)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   at LockCommons.Mq.EventMqBroker.Queue(Byte[] data) in C:\Users\cahitb1\cb\lock\LockSimulator\LockCommons\Mq\EventMqBroker.cs:line 21
+   at LockCommons.Mq.EventMqBroker.Queue(Object obj) in C:\Users\cahitb1\cb\lock\LockSimulator\LockCommons\Mq\EventMqBroker.cs:line 15
+   at LockEventGateway.Controllers.LockEventController.Post(LockEventRequest lockEvent) in C:\Users\cahitb1\cb\lock\LockSimulator\LockEventGateway\Controllers\LockEventController.cs:line 19
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.SyncObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.Invoke(HttpContext context)
+2018-11-18 15:43:52,701 [9] ERROR ExceptionMiddlewareExtensions [(null)] - Something went wrong: RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified endpoints were reachable ---> System.AggregateException: One or more errors occurred. (Connection failed) ---> RabbitMQ.Client.Exceptions.ConnectFailureException: Connection failed ---> System.Net.Internals.SocketExceptionFactory+ExtendedSocketException: No connection could be made because the target machine actively refused it 127.0.0.1:5672
+   at System.Net.Sockets.Socket.EndConnect(IAsyncResult asyncResult)
+   at System.Net.Sockets.Socket.<>c.<ConnectAsync>b__272_0(IAsyncResult iar)
+--- End of stack trace from previous location where exception was thrown ---
+   at RabbitMQ.Client.TcpClientAdapter.ConnectAsync(String host, Int32 port)
+   at RabbitMQ.Client.Impl.TaskExtensions.TimeoutAfter(Task task, Int32 millisecondsTimeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectOrFail(ITcpClient socket, AmqpTcpEndpoint endpoint, Int32 timeout)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingAddressFamily(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout, AddressFamily family)
+   at RabbitMQ.Client.Impl.SocketFrameHandler..ctor(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.ConnectionFactory.CreateFrameHandler(AmqpTcpEndpoint endpoint)
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   at RabbitMQ.Client.Framing.Impl.AutorecoveringConnection.Init(IEndpointResolver endpoints)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   at LockCommons.Mq.EventMqBroker.Queue(Byte[] data) in C:\Users\cahitb1\cb\lock\LockSimulator\LockCommons\Mq\EventMqBroker.cs:line 21
+   at LockCommons.Mq.EventMqBroker.Queue(Object obj) in C:\Users\cahitb1\cb\lock\LockSimulator\LockCommons\Mq\EventMqBroker.cs:line 15
+   at LockEventGateway.Controllers.LockEventController.Post(LockEventRequest lockEvent) in C:\Users\cahitb1\cb\lock\LockSimulator\LockEventGateway\Controllers\LockEventController.cs:line 19
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.SyncObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.Invoke(HttpContext context)
+2018-11-18 15:43:52,701 [9] ERROR ExceptionMiddlewareExtensions [(null)] - Something went wrong: RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified endpoints were reachable ---> System.AggregateException: One or more errors occurred. (Connection failed) ---> RabbitMQ.Client.Exceptions.ConnectFailureException: Connection failed ---> System.Net.Internals.SocketExceptionFactory+ExtendedSocketException: No connection could be made because the target machine actively refused it 127.0.0.1:5672
+   at System.Net.Sockets.Socket.EndConnect(IAsyncResult asyncResult)
+   at System.Net.Sockets.Socket.<>c.<ConnectAsync>b__272_0(IAsyncResult iar)
+--- End of stack trace from previous location where exception was thrown ---
+   at RabbitMQ.Client.TcpClientAdapter.ConnectAsync(String host, Int32 port)
+   at RabbitMQ.Client.Impl.TaskExtensions.TimeoutAfter(Task task, Int32 millisecondsTimeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectOrFail(ITcpClient socket, AmqpTcpEndpoint endpoint, Int32 timeout)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingAddressFamily(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout, AddressFamily family)
+   at RabbitMQ.Client.Impl.SocketFrameHandler..ctor(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.ConnectionFactory.CreateFrameHandler(AmqpTcpEndpoint endpoint)
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   at RabbitMQ.Client.Framing.Impl.AutorecoveringConnection.Init(IEndpointResolver endpoints)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   at LockCommons.Mq.EventMqBroker.Queue(Byte[] data) in C:\Users\cahitb1\cb\lock\LockSimulator\LockCommons\Mq\EventMqBroker.cs:line 21
+   at LockCommons.Mq.EventMqBroker.Queue(Object obj) in C:\Users\cahitb1\cb\lock\LockSimulator\LockCommons\Mq\EventMqBroker.cs:line 15
+   at LockEventGateway.Controllers.LockEventController.Post(LockEventRequest lockEvent) in C:\Users\cahitb1\cb\lock\LockSimulator\LockEventGateway\Controllers\LockEventController.cs:line 19
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.SyncObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.Invoke(HttpContext context)
+2018-11-18 15:43:52,711 [9] INFO  Microsoft.AspNetCore.Hosting.Internal.WebHost [(null)] - Request finished in 11061.8102ms 500 application/json
+2018-11-18 15:43:52,711 [9] INFO  Microsoft.AspNetCore.Hosting.Internal.WebHost [(null)] - Request finished in 11061.8102ms 500 application/json
