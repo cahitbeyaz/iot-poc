@@ -131,33 +131,7 @@ namespace LockCommons.DB
             //    replacement: lockDevice);
         }
 
-        /// <summary>
-        /// Removing LockEventBson with defined _id.
-        /// </summary>
-        /// <returns>
-        /// True - If LockEventBson was deleted.
-        /// False - If LockEventBson was not deleted.
-        /// </returns>
-        public async Task<bool> DeleteLockEventBsonById(ObjectId id)
-        {
-            var filter = Builders<LockEventBson>.Filter.Eq("_id", id);
-            var result = await _LockEventBsonsCollection.DeleteOneAsync(filter);
-            return result.DeletedCount != 0;
-        }
-
-        /// <summary>
-        /// Removing all data from 'LockEventBsons' collection. 
-        /// </summary>
-        /// <returns>
-        /// Number of deleted LockEventBsons.
-        /// </returns>
-        public async Task<long> DeleteAllLockEventBsons()
-        {
-            var filter = new BsonDocument();
-            var result = await _LockEventBsonsCollection.DeleteManyAsync(filter);
-            return result.DeletedCount;
-        }
-
+        
         /// <summary>
         /// Updating LockEventBson.
         /// </summary>

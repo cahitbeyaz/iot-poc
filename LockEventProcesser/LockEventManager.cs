@@ -38,7 +38,7 @@ namespace LockEventProcesser
                 {
                     DeviceEvent = lockEvent.DeviceEvent,
                     EventTime = lockEvent.EventTime.ToDateTime(),
-                    LockDeviceBson = new LockDeviceBson() { LockDeviceId = lockDeviceBson.LockDeviceId },
+                    LockDeviceBson = lockDeviceBson,
                     RequestReferenceNumber = lockEvent.RequestReferenceNumber
                 };
 
