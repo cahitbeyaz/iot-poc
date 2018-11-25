@@ -10,17 +10,18 @@ using System.Threading;
 
 namespace LockCommons.Mq
 {
-    public class EventMqBroker
+    public class MqBroker
     {
-        public static string queueName = "event_que";
-        public static void Queue(object obj)
+        public  string queueName = "";
+
+
+        public MqBroker(string qeuName)
         {
-            string serailizedObject = JsonConvert.SerializeObject(obj);
-            Queue(Encoding.UTF8.GetBytes(serailizedObject));
+            this.queueName = qeuName;
         }
 
         //@param src just for logging
-        public static void Queue(string src, byte[] data)
+        public  void Queue(string src, byte[] data)
         {
             try
             {
@@ -51,7 +52,7 @@ namespace LockCommons.Mq
             }
         }
 
-        public static void InitializeConsumer(DeliveryEventHandler lockEventDelegate, ushort nmrOfConcurrentWorkers)
+        public  void InitializeConsumer(DeliveryEventHandler lockEventDelegate, ushort nmrOfConcurrentWorkers)
         {
             var factory = new ConnectionFactory() { HostName = "localhost" };
             var connection = factory.CreateConnection();

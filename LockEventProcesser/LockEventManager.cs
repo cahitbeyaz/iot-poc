@@ -14,6 +14,8 @@ namespace LockEventProcesser
     public class LockEventManager
     {
         DeliveryEventHandler eventHandler;
+        static MqBroker mqBroker = new MqBroker("event_que");
+
         ushort nmrOfConcurrentWorkers = 10;
         public LockEventManager()
         {
@@ -33,7 +35,6 @@ namespace LockEventProcesser
                 };
 
                 await MongoDriver.MongoDbRepo.UpsertLockDeviceBson(lockDeviceBson);
-
                 LockEventBson lockEventBson = new LockEventBson()
                 {
                     DeviceEvent = lockEvent.DeviceEvent,
@@ -41,8 +42,17 @@ namespace LockEventProcesser
                     LockDeviceBson = lockDeviceBson,
                     RequestReferenceNumber = lockEvent.RequestReferenceNumber
                 };
-
                 await MongoDriver.MongoDbRepo.InsertLockEventBson(lockEventBson);
+
+                if (lockEvent.DeviceEvent == LockEvent.Types.DeviceEventEnum.Open)
+                {
+                    //publish a msg for another queu to set lock to passive if spesified amount time is passed since last event
+                    
+
+                }
+
+
+
                 Console.WriteLine($"Event processed to be processed {lockEvent}");
                 return true;
             }
@@ -56,7 +66,7 @@ namespace LockEventProcesser
 
         public void StartHandling()
         {
-            EventMqBroker.InitializeConsumer(eventHandler, nmrOfConcurrentWorkers);
+            mqBroker.InitializeConsumer(eventHandler, nmrOfConcurrentWorkers);
         }
     }
 

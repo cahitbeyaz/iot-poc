@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using LockCommons.Utilities;
+using static LockEventGateway.Program;
 
 namespace LockEventGateway.Network
 {
@@ -24,8 +25,11 @@ namespace LockEventGateway.Network
         // Thread signal.  
         public static ManualResetEvent allDone = new ManualResetEvent(false);
 
+        public static event ProcessMsg ProcessMsgEvent;
+
         public AsynchronousSocketListener()
         {
+
         }
 
         public static void StartListening()
@@ -116,7 +120,8 @@ namespace LockEventGateway.Network
                             //reset buffer
                             state.bufferIdx = 0;
                             Array.Clear(state.buffer, 0, StateObject.BufferSize);
-                            Task.Run(() => EventMqBroker.Queue(handler.RemoteEndPoint.ToString(), objectDataSlice));
+
+                            ProcessMsgEvent.Invoke(handler.RemoteEndPoint.ToString(), objectDataSlice);
                             handler.BeginReceive(state.buffer, state.bufferIdx, 4, 0, new AsyncCallback(ReadCallback), state);//start reading again
                         }
                         else
