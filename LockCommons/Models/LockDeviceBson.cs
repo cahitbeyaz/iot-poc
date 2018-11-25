@@ -6,9 +6,11 @@ using System.Text;
 
 namespace LockCommons.Models
 {
+    
     public class LockDeviceBson
     {
         [BsonId]
+        [BsonIgnoreIfDefault]
         public ObjectId Id { get; set; }
 
         [BsonElement("lockDeviceId")]

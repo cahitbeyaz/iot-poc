@@ -107,31 +107,14 @@ namespace LockCommons.DB
         /// </summary>
         public async Task UpsertLockDeviceBson(LockDeviceBson lockDevice)
         {
-            var findFilter = Builders<LockDeviceBson>.Filter.Eq(s => s.LockDeviceId, lockDevice?.LockDeviceId);
+            var result = _LockDeviceBsonsCollection.ReplaceOne(
+                filter: new BsonDocument("lockDeviceId", lockDevice.LockDeviceId),
+                options: new UpdateOptions { IsUpsert = true, },
+                replacement: lockDevice);
 
-
-            var exits = await _LockDeviceBsonsCollection.FindAsync<LockDeviceBson>(filter: findFilter);
-            LockDeviceBson firstOrDefaultLockDevice = exits.FirstOrDefault();
-            if (firstOrDefaultLockDevice == null)
-            {
-                await _LockDeviceBsonsCollection.InsertOneAsync(lockDevice);
-            }
-            else
-            {
-                if (lockDevice.LastActiveTime == null)
-                    lockDevice.LastActiveTime = firstOrDefaultLockDevice.LastActiveTime;
-
-                await _LockDeviceBsonsCollection.UpdateOneAsync(findFilter, new ObjectUpdateDefinition<LockDeviceBson>(lockDevice));
-            }
-
-            //upsert failse to work due to lack of _id generation
-            //var result = await _LockDeviceBsonsCollection.ReplaceOneAsync(
-            //    filter: new BsonDocument("lockDeviceId", lockDevice.LockDeviceId),
-            //    options: new UpdateOptions { IsUpsert = true },
-            //    replacement: lockDevice);
         }
 
-        
+
         /// <summary>
         /// Updating LockEventBson.
         /// </summary>
@@ -142,14 +125,18 @@ namespace LockCommons.DB
         /// True - If LockEventBson is updated.
         /// False - If LockEventBson is not updated.
         /// </returns>
-        public async Task<bool> UpdateLockEventBson(ObjectId id, string udateFieldName, string updateFieldValue)
+        public async Task UpdateLockDeviceBson(string lockDeviceId, string udateFieldName, string updateFieldValue)
         {
-            var filter = Builders<LockEventBson>.Filter.Eq("_id", id);
-            var update = Builders<LockEventBson>.Update.Set(udateFieldName, updateFieldValue);
+            var filter = Builders<LockDeviceBson>.Filter.Where(a => a.LockDeviceId == lockDeviceId);
+            var update = Builders<LockDeviceBson>.Update.Set(udateFieldName, updateFieldValue);
 
-            var result = await _LockEventBsonsCollection.UpdateOneAsync(filter, update);
+            var result = await _LockDeviceBsonsCollection.UpdateOneAsync(filter, update);
 
-            return result.ModifiedCount != 0;
+            if (result.ModifiedCount == 0)
+            {
+                throw new Exception($"lock device status could not be update {lockDeviceId}");
+            }
+
         }
 
         /// <summary>

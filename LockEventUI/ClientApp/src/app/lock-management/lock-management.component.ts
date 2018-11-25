@@ -12,7 +12,8 @@ export class LockManagementComponent {
   baseuri: string;
 
   public ChangeStatus(lockDevice: LockDeviceEventResult, @Inject('BASE_URL') baseUrl: string) {
-    this.http.post(this.baseuri + 'api/Lock/UpdateLockStatus', lockDevice).subscribe(result => {
+
+    this.http.post(this.baseuri + 'api/Lock/UpdateLockStatus', lockDevice.lockDevice).subscribe(result => {
     }, error => {
       console.error(error);
       lockDevice.lockDevice.isActive = !lockDevice.lockDevice.isActive;

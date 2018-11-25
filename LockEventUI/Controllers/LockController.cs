@@ -22,15 +22,20 @@ namespace LockEventUI.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task UpdateLockStatus(ApiLockDevice lockDevice)
+        public async Task UpdateLockStatus([FromBody]ApiLockDevice lockDevice)
         {
-            LockDeviceBson lockDeviceBson = new LockDeviceBson()
-            {
-                LockDeviceId = lockDevice.LockDeviceId,
-                IsActive = lockDevice.IsActive
-            };
 
-            await MongoDriver.MongoDbRepo.UpsertLockDeviceBson(lockDeviceBson);
+            var ld = await MongoDriver.MongoDbRepo.GetLockDeviceBsonsByField("lockDeviceId", lockDevice.LockDeviceId);
+
+            if (ld.FirstOrDefault() != null)
+            {
+                LockDeviceBson lockDeviceBson = ld.FirstOrDefault();
+                lockDeviceBson.IsActive = lockDevice.IsActive;
+                await MongoDriver.MongoDbRepo.UpsertLockDeviceBson(lockDeviceBson);
+            }
+            else
+                throw new Exception($"Lock device not found {lockDevice}");
+
         }
     }
 }
