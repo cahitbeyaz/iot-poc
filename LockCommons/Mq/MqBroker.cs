@@ -12,7 +12,7 @@ namespace LockCommons.Mq
 {
     public class MqBroker
     {
-        public  string queueName = "";
+        public string queueName = "";
 
 
         public MqBroker(string qeuName)
@@ -21,7 +21,7 @@ namespace LockCommons.Mq
         }
 
         //@param src just for logging
-        public  void Queue(string src, byte[] data)
+        public void Queue(string src, byte[] msg)
         {
             try
             {
@@ -42,17 +42,64 @@ namespace LockCommons.Mq
                     channel.BasicPublish(exchange: "",
                                          routingKey: queueName,
                                          basicProperties: properties,
-                                         body: data);
-                    Console.WriteLine($"from:{src} {data.Length} bytes Sent to {queueName}");
+                                         body: msg);
+                    Console.WriteLine($"from:{src} {msg.Length} bytes Sent to {queueName}");
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Unexpected error while Queue msg { BitConverter.ToString(data)} err {e}");
+                Console.WriteLine($"Unexpected error while Queue msg { BitConverter.ToString(msg)} err {e}");
             }
         }
 
-        public  void InitializeConsumer(DeliveryEventHandler lockEventDelegate, ushort nmrOfConcurrentWorkers)
+        public void DelayedQueu(string src, byte[] msg, int delayMs)
+        {
+            try
+            {
+
+                var factory = new ConnectionFactory() { HostName = "localhost" };
+                using (var connection = factory.CreateConnection())
+                using (var channel = connection.CreateModel())
+                {
+                    IDictionary<string, object> args = new Dictionary<string, object>
+                    {
+                        {"x-delayed-type", "direct"}
+                    };
+                    channel.ExchangeDeclare($"{queueName}Exchange", "x-delayed-message", true, false, args);
+
+
+                    var queue = channel.QueueDeclare(queue: queueName,
+                     durable: true,
+                     exclusive: false,
+                     autoDelete: false,
+                     arguments: null);
+
+                    channel.QueueBind(queue, $"{queueName}Exchange", $"{queueName}RoutKey");
+
+
+                    var properties = channel.CreateBasicProperties();
+                    properties.Persistent = true;
+
+                    properties.Headers = new Dictionary<string, object>
+                    {
+                        {"x-delay", delayMs}
+                    };
+
+                    channel.BasicPublish($"{queueName}Exchange", $"{queueName}RoutKey", properties, msg);
+
+                    Console.WriteLine($"from:{src} {msg.Length} bytes Sent to {queueName}");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Unexpected error while Queue msg { BitConverter.ToString(msg)} err {e}");
+            }
+
+
+
+        }
+
+        public void InitializeConsumer(IEventHandler lockEventDelegate, ushort nmrOfConcurrentWorkers)
         {
             var factory = new ConnectionFactory() { HostName = "localhost" };
             var connection = factory.CreateConnection();

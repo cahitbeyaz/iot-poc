@@ -44,7 +44,7 @@ namespace LockCommons.DB
             {
                 _database.ListCollections();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }

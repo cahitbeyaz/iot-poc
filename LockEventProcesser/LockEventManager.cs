@@ -1,8 +1,11 @@
 ﻿using LockCommons.DB;
 using LockCommons.Models;
+using LockCommons.Models.Mq;
 using LockCommons.Models.Proto;
 using LockCommons.Mq;
+using LockEventGateway;
 using MongoDB.Bson;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,59 +17,24 @@ namespace LockEventProcesser
     public class LockEventManager
     {
         DeliveryEventHandler eventHandler;
+        CheckDeviceActivityEventHandler checkDeviceActivityEventHandler;
         static MqBroker mqBroker = new MqBroker("event_que");
+        static MqBroker activityCheckQue = new MqBroker("activity_que");
 
         ushort nmrOfConcurrentWorkers = 10;
         public LockEventManager()
         {
-            eventHandler = new DeliveryEventHandler();
-            eventHandler.LockEventProcessHandler += ProcessAEvent;
+            eventHandler = new DeliveryEventHandler(activityCheckQue);
+            checkDeviceActivityEventHandler = new CheckDeviceActivityEventHandler();
         }
 
-        private async Task<bool> ProcessAEvent(LockEvent lockEvent)
-        {
-            try
-            {
-                LockDeviceBson lockDeviceBson = new LockDeviceBson()
-                {
-                    IsActive = true,
-                    LastActiveTime = lockEvent.EventTime.ToDateTime(),
-                    LockDeviceId = lockEvent.LockDeviceId
-                };
-
-                await MongoDriver.MongoDbRepo.UpsertLockDeviceBson(lockDeviceBson);
-                LockEventBson lockEventBson = new LockEventBson()
-                {
-                    DeviceEvent = lockEvent.DeviceEvent,
-                    EventTime = lockEvent.EventTime.ToDateTime(),
-                    LockDeviceBson = lockDeviceBson,
-                    RequestReferenceNumber = lockEvent.RequestReferenceNumber
-                };
-                await MongoDriver.MongoDbRepo.InsertLockEventBson(lockEventBson);
-
-                if (lockEvent.DeviceEvent == LockEvent.Types.DeviceEventEnum.Open)
-                {
-                    //publish a msg for another queu to set lock to passive if spesified amount time is passed since last event
-                    
-
-                }
-
-
-
-                Console.WriteLine($"Event processed to be processed {lockEvent}");
-                return true;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"err {e}");
-            }
-            return false;
-
-        }
+        
 
         public void StartHandling()
         {
             mqBroker.InitializeConsumer(eventHandler, nmrOfConcurrentWorkers);
+
+            activityCheckQue.InitializeConsumer(checkDeviceActivityEventHandler, nmrOfConcurrentWorkers);
         }
     }
 
