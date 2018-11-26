@@ -10,7 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A5315CD2-68F8-4329-98A1-DA6A701F08A6}"
 	ProjectSection(SolutionItems) = preProject
 		init.bat = init.bat
-		readme.txt = readme.txt
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LockEventGateway", "LockEventGateway\LockEventGateway.csproj", "{53C41AA0-611F-4A2A-A9AD-AE0A79352930}"
