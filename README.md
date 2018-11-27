@@ -25,18 +25,24 @@ to run
 projects:
 LockCommons:
 	commons and utilities for other projects.
+	
 LockSimulator: 
 	simulates a smart lock device
+	
 LockEventGateway: 
 	Listens and receives binary event messages from LockSimulator then sends these messages to event_que using rabbit mq
+	
 LockEventProcesser:
 	consumes events genereated via LockEventGateway
 	also handles event based lock device activity check 
+
 LockEventUI:
 	backoffice and api for management and reporting
 
 
-Some notes:
+
+notes:
+
 *Google proto-buf is used for lightweight messaging between lock(iot device) and event gateway
 *binary message frame and partial message delivery handled
 *logging across all application did not implemented for simplicity and time constraints
